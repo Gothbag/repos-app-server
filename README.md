@@ -2,6 +2,8 @@
 
 This is the back-end to my **repos-app**. It uses local memory SQLite in order to track the repositories that the user wishes to track.
 
+This employs a rudimentary DAO which could be worked on in order for it to be more reusable.
+
 ## Available Scripts
 
 In the project directory, you can run:
