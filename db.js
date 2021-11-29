@@ -84,3 +84,17 @@ module.exports.addRepo = async repo => {
     );
   });
 };
+
+module.exports.getAllRepos = () => {
+  return new Promise(function(resolve, reject) {
+    db.all("SELECT * FROM trackedRepos", [], (err, rows) => {
+      if (err) {
+        return reject(err);
+      }
+
+      rows.forEach(row => {
+        resolve(rows);
+      });
+    });
+  });
+};

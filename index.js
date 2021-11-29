@@ -2,7 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 
-const { addRepo } = require("./db");
+const { addRepo, getAllRepos } = require("./db");
 
 const app = express();
 const port = 3001;
@@ -11,7 +11,7 @@ app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-app.post("/track_repo", (req, res) => {
+app.post("/api/track_repo", (req, res) => {
   const repo = req.body;
 
   try {
@@ -22,12 +22,11 @@ app.post("/track_repo", (req, res) => {
   }
 });
 
-app.post("/repos", (req, res) => {
-  const repo = req.body;
-
+app.get("/api/repos", async (req, res) => {
   try {
-    addRepo(repo);
-    res.sendStatus(201);
+    const repos = await getAllRepos();
+
+    res.send(repos);
   } catch (e) {
     console.error(e);
   }
